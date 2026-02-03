@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class plan_entrenamiento extends Model
+class Sesion_bloque extends Model
 {
     //
 }

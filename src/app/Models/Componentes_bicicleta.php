@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class componentes_bicicleta extends Model
+class Componentes_bicicleta extends Model
 {
     //
 }

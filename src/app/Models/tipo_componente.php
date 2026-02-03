@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tipo_componente extends Model
+class Tipo_componente extends Model
 {
     //
 }
