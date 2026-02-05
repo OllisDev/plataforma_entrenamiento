@@ -6,22 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('plan_entrenamientos', function (Blueprint $table) {
+        Schema::create('plan_entrenamiento', function (Blueprint $table) {
+            // creacion tabla "plan_entrenamiento"
             $table->id();
-            $table->timestamps();
+            $table->integer('id_ciclista')->nullable(false);
+            $table->string('nombre', 100)->nullable(false);
+            $table->string('descripcion', 255);
+            $table->timestamp('fecha_inicio')->nullable(false);
+            $table->timestamp('fecha_fin')->nullable(false);
+            $table->string('objetivo', 100);
+            $table->boolean('activo')->default(1);
+            $table->foreignId('id_ciclista')->constrained()->onUpdate('cascade')->onDelete('cascade');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('plan_entrenamientos');
     }
 };
