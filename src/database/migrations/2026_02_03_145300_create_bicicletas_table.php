@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 50);
             $table->enum('tipo', ['carretera', 'mtb', 'gravel', 'rodillo']);
-            $table->string('comentario', 255)->nullable();
+            $table->string('comentario', 255)->nullable(false);
         });
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
 
 
             $table->string('marca',50);
-            $table->string('modelo',50)->nullable();
+            $table->string('modelo',50)->nullable(false);
             $table->string('string',50)->nullable();
             $table->enum('velocidad',['9v','10v','11v','12v'])->nullable();
             $table->enum('posicion',['delantera','trasera','ambas'])->nullable();
