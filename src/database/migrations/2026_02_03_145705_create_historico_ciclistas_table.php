@@ -11,9 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('historico_ciclistas', function (Blueprint $table) {
+        Schema::create('historico_ciclista', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreingId('id_ciclista')->constrained('ciclista')->onDelete('cascade');
+
+            $table->date('fecha');
+            $table->decimal('peso', 5,2)->nullable();
+            $table->integer('tfp')->nullable();
+            $table->integer('pulso_max')->nullable();
+            $table->integer('pulso_reposo')->nullable();
+            $table->integer('potencia_max')->nullable();
+            $table->decimal('grasa_corporal',4,2)->nullable();
+            $table->decimal('vo2max',4,2)->nullable();
+            $table->string('comentario',255)->nullable();
+
+
+            $table->unique(['id_ciclista', 'fecha']);
+
         });
     }
 
@@ -22,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('historico_ciclistas');
+        Schema::dropIfExists('historico_ciclista');
     }
 };
