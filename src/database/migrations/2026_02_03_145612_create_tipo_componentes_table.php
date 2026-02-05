@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('tipo_componentes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nombre', 50)->unique();
+            $table->string('descripcion', 255)->nullable();
         });
     }
 
