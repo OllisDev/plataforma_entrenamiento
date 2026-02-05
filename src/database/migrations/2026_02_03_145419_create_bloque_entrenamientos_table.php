@@ -11,9 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bloque_entrenamientos', function (Blueprint $table) {
+        Schema::create('bloque_entrenamiento', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nombre',100);
+            $table->string('descripcion',255)->nullable(false);
+            $table->enum('tipo',['rodaje','intervalos','fuerza','recuperacion','test'])->nullable(false);
+            $table->time('duracion_estimada')->nullable();
+            $table->decimal('potencia_pct_min', 5,2)->nullable();
+            $table->decimal('potencia_pct_max', 5,2)->nullable();
+            $table->decimal('pulso_pct_max', 5,2)->nullable();
+            $table->decimal('pulso_reserva_pct', 5,2)->nullable();
+            $table->string('comentario',255)->nullable();
+
+
+           
         });
     }
 
@@ -22,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bloque_entrenamientos');
+        Schema::dropIfExists('bloque_entrenamiento');
     }
 };
