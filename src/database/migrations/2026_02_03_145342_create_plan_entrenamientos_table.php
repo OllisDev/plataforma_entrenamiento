@@ -8,8 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // creacion tabla "plan_entrenamiento"
         Schema::create('plan_entrenamiento', function (Blueprint $table) {
-            // creacion tabla "plan_entrenamiento"
             $table->id();
             $table->integer('id_ciclista')->nullable(false);
             $table->string('nombre', 100)->nullable(false);
@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('fecha_fin')->nullable(false);
             $table->string('objetivo', 100);
             $table->boolean('activo')->default(1);
-            $table->foreignId('id_ciclista')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('id_ciclista')->constrained()->references('id')->on('ciclista')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 };

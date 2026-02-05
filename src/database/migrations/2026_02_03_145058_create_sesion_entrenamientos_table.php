@@ -6,22 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('sesion_entrenamientos', function (Blueprint $table) {
+        // creacion tabla "sesion_entrenamiento"
+        Schema::create('sesion_entrenamiento', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('id_plan')->nullable(false);
+            $table->string('nombre', 100);
+            $table->string('descripcion', 255);
+            $table->boolean('completada')->default(0);
+            $table->foreignId('id_plan')->constrained()->references('id')->on('plan_entrenamiento')->onUpdate('cascade')->onDelete('cascade');
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('sesion_entrenamientos');
     }
 };
