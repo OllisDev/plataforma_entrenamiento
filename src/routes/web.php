@@ -3,11 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CiclistaController;
 
+// -- RUTAS PARA LA REDIRECCIÓN DE LAS VISTAS -- 
+
 Route::get('/login', function () {
     return view('login');
 });
 
-// -- RUTAS PARA LA VISUALIZACIÓN DEL SITIO WEB
+Route::get('/register', function () {
+    return view('register');
+});
+
+// -- RUTAS PARA LA FUNCIONALIDAD DE LAS PÁGINAS --
 
 // rutas para la autenticación
 Route::post('/register', [CiclistaController::class, 'register'])->name('cyclist.register');
