@@ -25,11 +25,8 @@ services:
     environment:
       MYSQL_DATABASE: plataforma_entrenamiento
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
     volumes:
       - dbdata:/var/lib/mysql
 
 volumes:
   dbdata:
-
