@@ -11,9 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sesion_bloques', function (Blueprint $table) {
+        Schema::create('sesion_bloque', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('id_sesion_entrenamiento');
+            $table->unsignedInteger('id_bloque_entrenamiento');
+
+
+            $table->integer('orden')->nullable(false);
+            $table->integer('repeticiones')->default(1);
+
+            $table->foreign('id_sesion_entrenamiento')
+                  ->references('id')
+                  ->on('sesion_entrenamiento')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+
+            $table->foreign('id_bloque_entrenamiento')
+                  ->references('id')
+                  ->on('bloque_entrenamiento')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+           
         });
     }
 
@@ -22,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sesion_bloques');
+        Schema::dropIfExists('sesion_bloque');
     }
 };
