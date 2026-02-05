@@ -11,13 +11,13 @@ return new class extends Migration
         // creacion tabla "ciclista"
         Schema::create('ciclista', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->nullable(false);
-            $table->string('apellidos')->nullable(false);
+            $table->string('nombre', 80)->nullable(false);
+            $table->string('apellidos', 80)->nullable(false);
             $table->timestamp('fecha_nacimiento')->nullable(false);
             $table->decimal('peso_base', 5, 2);
             $table->integer('altura_base');
-            $table->string('email')->nullable(false);
-            $table->string('password')->nullable(false);
+            $table->string('email', 80)->nullable(false);
+            $table->string('password', 30)->nullable(false);
         });
     }
 };
