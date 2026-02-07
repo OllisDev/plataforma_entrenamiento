@@ -13,6 +13,10 @@ Route::get('/register', function () {
     return view('register');
 });
 
+Route::get('/', function () {
+    return view('main');
+});
+
 // -- RUTAS PARA LA FUNCIONALIDAD DE LAS PÁGINAS --
 
 // rutas para la autenticación

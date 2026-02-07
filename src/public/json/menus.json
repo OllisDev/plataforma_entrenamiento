@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Inicio",
+        "link": "/"
+    },
+    {
+        "title": "Planes",
+        "link": "#",
+        "submenus": [
+            { "title": "Ver planes", "link": "/plan" },
+            { "title": "Crear plan", "link": "/plan/crear" }
+        ]
+    },
+    {
+        "title": "Sesiones",
+        "link": "#",
+        "submenus": [
+            { "title": "Ver sesiones", "link": "/sesion" },
+            { "title": "Crear sesión", "link": "/sesion/crear" }
+        ]
+    }
+]
