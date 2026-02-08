@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="form-plan"></div>
+    <div class="table-plan" id="table-plan"></div>
 </body>
 
 </html>

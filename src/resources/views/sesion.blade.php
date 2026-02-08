@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan de entrenamiento - Sesiones</title>
+    <title>Plan de entrenamiento - Sesiones de entrenamiento</title>
 </head>
 
 <body>
-    <div class="form-sesion"></div>
+    <div class="table-sesion" id="table-sesion"></div>
 </body>
 
 </html>
