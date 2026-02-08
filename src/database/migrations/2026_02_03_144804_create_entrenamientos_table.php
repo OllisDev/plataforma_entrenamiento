@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('entrenamiento', function (Blueprint $table) {
             $table->id();
             //claves foraneas
-            $table->unsignedInteger('id_ciclista')->nullable(false);
-            $table->unsignedInteger('id_bicicleta')->nullable(false);
-            $table->unsignedInteger('id_sesion')->nullable(true);
+            $table->unsignedBigInteger('id_ciclista')->nullable(false);
+            $table->unsignedBigInteger('id_bicicleta')->nullable(false);
+            $table->unsignedBigInteger('id_sesion')->nullable(true);
 
 
             $table->dateTime('fecha')->nullable(false);
             $table->time('duracion')->nullable(false);
-            $table->decimal('kilometros', 6,2)->nullable(false);
-            $table->string('recorrido',150)->nullable(false);
+            $table->decimal('kilometros', 6, 2)->nullable(false);
+            $table->string('recorrido', 150)->nullable(false);
 
             $table->integer('pulso_medio')->nullable();
             $table->integer('pulso_max')->nullable();
@@ -35,23 +35,22 @@ return new class extends Migration
             $table->string('comentario', 255)->nullable();
 
             $table->foreign('id_ciclista')
-                  ->references('id')
-                  ->on('ciclista')
-                  ->onDelete('restrict')
-                  ->onUpdate('cascade');
+                ->references('id')
+                ->on('ciclista')
+                ->onDelete('restrict')
+                ->onUpdate('cascade');
 
             $table->foreign('id_bicicleta')
-                  ->references('id')
-                  ->on('bicicleta')
-                  ->onDelete('restrict')
-                  ->onUpdate('cascade');
-            
-            $table->foreign('id_sesion')
-                  ->references('id')
-                  ->on('sesion_entrenamiento')
-                  ->onDelete('set null')
-                  ->onUpdate('cascade');
+                ->references('id')
+                ->on('bicicleta')
+                ->onDelete('restrict')
+                ->onUpdate('cascade');
 
+            $table->foreign('id_sesion')
+                ->references('id')
+                ->on('sesion_entrenamiento')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
         });
     }
 

@@ -11,11 +11,18 @@ return new class extends Migration
         // creacion tabla "sesion_entrenamiento"
         Schema::create('sesion_entrenamiento', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_plan')->nullable(false);
+            $table->foreignId('id_plan')->constrained()->references('id')->on('plan_entrenamiento')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nombre', 100);
             $table->string('descripcion', 255);
             $table->boolean('completada')->default(0);
-            $table->foreignId('id_plan')->constrained()->references('id')->on('plan_entrenamiento')->onUpdate('cascade')->onDelete('cascade');
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('sesion_entrenamiento');
     }
 };

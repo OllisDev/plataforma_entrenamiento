@@ -13,6 +13,9 @@
     <nav id="menu-nav">
         <ul id="menu-list"></ul>
     </nav>
+    <div class="card-content">
+        <div id="content"></div>
+    </div>
 </body>
 
 </html>

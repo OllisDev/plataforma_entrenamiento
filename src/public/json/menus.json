@@ -7,16 +7,34 @@
         "title": "Planes",
         "link": "#",
         "submenus": [
-            { "title": "Ver planes", "link": "/plan" },
-            { "title": "Crear plan", "link": "/plan/crear" }
+            { "title": "Ver planes de entrenamiento", "link": "/plan" },
+            { "title": "Crear plan de entrenamiento", "link": "/plan/crear" }
         ]
     },
     {
         "title": "Sesiones",
         "link": "#",
         "submenus": [
-            { "title": "Ver sesiones", "link": "/sesion" },
-            { "title": "Crear sesión", "link": "/sesion/crear" }
+            { "title": "Ver sesiones de entrenamiento", "link": "/sesion" },
+            { "title": "Crear sesión de entrenamiento", "link": "/sesion/crear" }
+        ]
+    },
+    {
+        "title": "Bloques",
+        "link": "#",
+        "submenus": [
+            { "title": "Ver sesión de bloque", "link": "/sesionBloque" },
+            { "title": "Crear sesión de bloque", "link": "/sesionBloque" },
+            { "title": "Ver bloque de entrenamiento", "link": "/bloque" },
+            { "title": "Crear bloque de entrenamiento", "link": "bloque/crear" }
+        ]
+    },
+    {
+        "title": "Resultados",
+        "link": "#",
+        "submenus": [
+            { "title": "Ver resultados", "link": "/resultado" },
+            { "title": "Registrar resultado", "link": "/resultado/crear" }
         ]
     }
 ]

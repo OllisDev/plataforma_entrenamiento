@@ -11,14 +11,21 @@ return new class extends Migration
         // creacion tabla "plan_entrenamiento"
         Schema::create('plan_entrenamiento', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_ciclista')->nullable(false);
+            $table->foreignId('id_ciclista')->constrained()->references('id')->on('ciclista')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nombre', 100)->nullable(false);
             $table->string('descripcion', 255);
             $table->timestamp('fecha_inicio')->nullable(false);
             $table->timestamp('fecha_fin')->nullable(false);
             $table->string('objetivo', 100);
             $table->boolean('activo')->default(1);
-            $table->foreignId('id_ciclista')->constrained()->references('id')->on('ciclista')->onUpdate('cascade')->onDelete('cascade');
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('plan_entrenamiento');
     }
 };

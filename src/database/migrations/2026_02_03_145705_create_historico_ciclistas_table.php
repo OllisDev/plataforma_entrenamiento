@@ -13,21 +13,20 @@ return new class extends Migration
     {
         Schema::create('historico_ciclista', function (Blueprint $table) {
             $table->id();
-            $table->foreingId('id_ciclista')->constrained('ciclista')->onDelete('cascade');
+            $table->foreignId('id_ciclista')->constrained('ciclista')->onDelete('cascade');
 
             $table->date('fecha');
-            $table->decimal('peso', 5,2)->nullable();
+            $table->decimal('peso', 5, 2)->nullable();
             $table->integer('tfp')->nullable();
             $table->integer('pulso_max')->nullable();
             $table->integer('pulso_reposo')->nullable();
             $table->integer('potencia_max')->nullable();
-            $table->decimal('grasa_corporal',4,2)->nullable();
-            $table->decimal('vo2max',4,2)->nullable();
-            $table->string('comentario',255)->nullable();
+            $table->decimal('grasa_corporal', 4, 2)->nullable();
+            $table->decimal('vo2max', 4, 2)->nullable();
+            $table->string('comentario', 255)->nullable();
 
 
             $table->unique(['id_ciclista', 'fecha']);
-
         });
     }
 

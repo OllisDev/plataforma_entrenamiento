@@ -41,7 +41,7 @@ Route::get('/sesion', [SesionEntrenamientoController::class, 'listSessionAPI'])-
 Route::get('/sesion/{sesion}', [SesionEntrenamientoController::class, 'listSessionByIdAPI'])->name('session.listSessionById');
 
 // rutas para los resultados de entrenamiento
-Route::post('/resultados/crear', [ResultadosController::class, "createResultAPI"])->name('result.createResult');
+Route::post('/resultado/crear', [ResultadosController::class, "createResultAPI"])->name('result.createResult');
 Route::get('/resultado/{resultado}', [ResultadosController::class, "listResultByIdAPI"])->name('result.listResultById');
 
 // rutas para la sesion-plan entrenamiento

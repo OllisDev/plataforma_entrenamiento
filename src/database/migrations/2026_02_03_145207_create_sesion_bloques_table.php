@@ -14,24 +14,23 @@ return new class extends Migration
         Schema::create('sesion_bloque', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_sesion_entrenamiento');
-            $table->unsignedInteger('id_bloque_entrenamiento');
+            $table->unsignedBigInteger('id_bloque_entrenamiento');
 
 
             $table->integer('orden')->nullable(false);
             $table->integer('repeticiones')->default(1);
 
             $table->foreign('id_sesion_entrenamiento')
-                  ->references('id')
-                  ->on('sesion_entrenamiento')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
+                ->references('id')
+                ->on('sesion_entrenamiento')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->foreign('id_bloque_entrenamiento')
-                  ->references('id')
-                  ->on('bloque_entrenamiento')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-           
+                ->references('id')
+                ->on('bloque_entrenamiento')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
