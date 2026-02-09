@@ -24,17 +24,9 @@
         "link": "#",
         "submenus": [
             { "title": "Ver sesión de bloque", "link": "/sesionBloque" },
-            { "title": "Crear sesión de bloque", "link": "/sesionBloque" },
+            { "title": "Crear sesión de bloque", "link": "/sesionBloque/crear" },
             { "title": "Ver bloque de entrenamiento", "link": "/bloque" },
             { "title": "Crear bloque de entrenamiento", "link": "bloque/crear" }
-        ]
-    },
-    {
-        "title": "Resultados",
-        "link": "#",
-        "submenus": [
-            { "title": "Ver resultados", "link": "/resultado" },
-            { "title": "Registrar resultado", "link": "/resultado/crear" }
         ]
     }
 ]

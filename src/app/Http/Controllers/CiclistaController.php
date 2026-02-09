@@ -2,63 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ciclista;
 use Illuminate\Http\Request;
 
 class CiclistaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function register(Request $request, Ciclista $ciclista)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $data = $request->validate([
+            'nombre' => 'required|string|max:80',
+            'apellidos' => 'required|string|max:80',
+            'fecha_nacimiento' => 'date',
+            'email' => 'required|string|max:80',
+            'password' => 'required|string|max:30'
+        ]);
+        $ciclista->create($data);
+        return redirect()->route('ciclista.login');
     }
 }
