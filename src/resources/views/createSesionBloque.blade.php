@@ -8,7 +8,9 @@
 </head>
 
 <body>
-    <div class="form-createSesionBloque" id="form-createSesionBloque"></div>
+    <div class="form-createSesionBloque" id="form-createSesionBloque">
+
+    </div>
 </body>
 
 </html>

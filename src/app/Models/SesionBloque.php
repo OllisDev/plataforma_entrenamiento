@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Bicicleta extends Model
+class SesionBloque extends Model
 {
     use HasFactory;
-    protected $table = 'bicicleta';
+    protected $table = 'sesion_bloque';
+
     public $timestamps = false;
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('peso_base', 5, 2);
             $table->integer('altura_base');
             $table->string('email', 80)->nullable(false);
-            $table->string('password', 30)->nullable(false);
+            $table->string('password', 60)->nullable(false);
         });
     }
 };

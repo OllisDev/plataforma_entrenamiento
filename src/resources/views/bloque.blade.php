@@ -24,14 +24,17 @@
             </thead>
             <tbody>
                 @foreach ($bloques as $bloque)
-                <tr>{{ $bloque->nombre }}</tr>
-                <tr>{{ $bloque->descripcion }}</tr>
-                <tr>{{ $bloque->tipo }}</tr>
-                <tr>{{ $bloque->duracion_estimada }}</tr>
-                <tr>{{ $bloque->potencia_pct_min }}</tr>
-                <tr>{{ $bloque->potencia_pct_max }}</tr>
-                <tr>{{ $bloque->pulso_reserva_pct }}</tr>
-                <tr>{{ $bloque->comentario }}</tr>
+                <tr>
+                    <td>{{ $bloque->nombre }}</td>
+                    <td>{{ $bloque->descripcion }}</td>
+                    <td>{{ $bloque->tipo }}</td>
+                    <td>{{ $bloque->duracion_estimada }}</td>
+                    <td>{{ $bloque->potencia_pct_min }}</td>
+                    <td>{{ $bloque->potencia_pct_max }}</td>
+                    <td>{{ $bloque->pulso_reserva_pct }}</td>
+                    <td>{{ $bloque->comentario }}</td>
+                </tr>
+
                 @endforeach
             </tbody>
         </table>

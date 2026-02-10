@@ -19,9 +19,12 @@
             </thead>
             <tbody>
                 @foreach ($sesiones as $sesion)
-                <tr>{{ $sesion->nombre }}</tr>
-                <tr>{{ $sesion->descripcion }}</tr>
-                <tr>{{ $sesion->completada ? 'Si' : 'No' }}</tr>
+                <tr>
+                    <td>{{ $sesion->nombre }}</td>
+                    <td>{{ $sesion->descripcion }}</td>
+                    <td>{{ $sesion->completada ? 'Si' : 'No' }}</td>
+                </tr>
+
                 @endforeach
             </tbody>
         </table>

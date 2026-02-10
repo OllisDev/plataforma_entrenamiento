@@ -18,8 +18,11 @@
             </thead>
             <tbody>
                 @foreach ($sesionesPlan as $sesionPlan)
-                <tr>{{ $sesion->orden }}</tr>
-                <tr>{{ $sesion->repeticiones }}</tr>
+                <tr>
+                    <td>{{ $sesionPlan->orden }}</td>
+                    <td>{{ $sesionPlan->repeticiones }}</td>
+                </tr>
+
                 @endforeach
             </tbody>
         </table>
