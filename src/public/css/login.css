@@ -24,7 +24,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .form label {
@@ -57,6 +57,21 @@ body {
 
 .btnLogin:hover {
     background-color: rgb(119, 127, 245);
+}
+
+.forget-password {
+    color: rgb(255, 255, 255);
+    background: transparent;
+    padding: 4px;
+    margin-left: 3px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.forget-password:hover {
+    background: rgba(255, 255, 255, 0.247);
 }
 
 .link {
