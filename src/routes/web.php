@@ -1,21 +1,14 @@
 <?php
 
-use App\Http\Controllers\BloqueEntrenamientoController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CiclistaController;
+use App\Http\Controllers\BloqueEntrenamientoController;
 use App\Http\Controllers\PlanEntrenamientoController;
 use App\Http\Controllers\SesionEntrenamientoController;
 use App\Http\Controllers\SesionPlanController;
 
 // -- RUTAS PARA LA REDIRECCIÓN DE LAS VISTAS -- 
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/register', function () {
-    return view('register');
-});
 
 Route::get('/', function () {
     return view('main');
@@ -79,3 +72,15 @@ Route::get('/sesion', [SesionEntrenamientoController::class, 'listSesiones'])->n
 
 // rutas para la sesion-plan
 Route::get('/sesionBloque', [SesionPlanController::class, 'listSesionPlan'])->name('sessionPlan.listSesionBloque');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
