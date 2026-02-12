@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Ciclista;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,24 +27,29 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // mapear nombres del formulario a los del modelo
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:80'],
+            'lastName' => ['required', 'string', 'max:80'],
+            'birthday' => ['required', 'date'],
+            'email' => ['required', 'email', 'max:80', 'unique:ciclista,email'],
+            'password' => ['required', 'string', 'max:60', 'confirmed'],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        // renombrar campos para el modelo
+        $ciclistaData = [
+            'nombre' => $data['name'],
+            'apellidos' => $data['lastName'],
+            'fecha_nacimiento' => $data['birthday'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ];
 
-        event(new Registered($user));
+        Ciclista::create($ciclistaData);
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('login'));
     }
 }

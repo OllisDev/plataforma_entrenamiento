@@ -16,7 +16,8 @@
 
             <div class="form">
                 <label for="name">Nombre:</label>
-                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus autocomplete="name">
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
+                    autocomplete="name">
             </div>
             <x-input-error :messages="$errors->get('name')" class="mb-2" />
 
@@ -27,7 +28,7 @@
 
             <div class="form">
                 <label for="birthday">Fecha de nacimiento:</label>
-                <input id="birthday" type="date" name="birthday">
+                <input id="birthday" type="date" name="birthday" max="{{ date('Y-m-d') }}">
             </div>
 
             <div class="form">
@@ -44,7 +45,8 @@
 
             <div class="form">
                 <label for="password_confirmation">Confirmar contraseña:</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
+                <input id="password_confirmation" type="password" name="password_confirmation" required
+                    autocomplete="new-password">
             </div>
             <x-input-error :messages="$errors->get('password_confirmation')" class="mb-2" />
 

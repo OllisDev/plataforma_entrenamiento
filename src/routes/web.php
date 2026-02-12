@@ -12,7 +12,7 @@ use App\Http\Controllers\SesionPlanController;
 
 Route::get('/', function () {
     return view('main');
-});
+})->middleware(['auth'])->name('main'); // middleware -> obligar solo a los ususarios autenticados acceder a la pagina principal, sino redirige al login
 
 Route::get('/plan', function () {
     return view('plan');
@@ -72,10 +72,6 @@ Route::get('/sesion', [SesionEntrenamientoController::class, 'listSesiones'])->n
 
 // rutas para la sesion-plan
 Route::get('/sesionBloque', [SesionPlanController::class, 'listSesionPlan'])->name('sessionPlan.listSesionBloque');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

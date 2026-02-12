@@ -22,14 +22,14 @@
             </thead>
             <tbody>
                 @foreach ($planes as $plan)
-                <tr>
-                    <td>{{ $plan->nombre }}</td>
-                    <td>{{ $plan->descripcion }}</td>
-                    <td>{{ $plan->fecha_inicio }}</td>
-                    <td>{{ $plan->fecha_fin }}</td>
-                    <td>{{ $plan->objetivo }}</td>
-                    <td>{{ $plan->activo ? 'Si' : 'No'}}</td>
-                </tr>
+                    <tr>
+                        <td>{{ $plan->nombre }}</td>
+                        <td>{{ $plan->descripcion }}</td>
+                        <td>{{ $plan->fecha_inicio }}</td>
+                        <td>{{ $plan->fecha_fin }}</td>
+                        <td>{{ $plan->objetivo }}</td>
+                        <td>{{ $plan->activo ? 'Si' : 'No'}}</td>
+                    </tr>
 
                 @endforeach
             </tbody>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CiclistaController extends Controller
 {
+    /*
     public function register(Request $request, Ciclista $ciclista)
     {
         $data = $request->validate([
@@ -19,4 +20,5 @@ class CiclistaController extends Controller
         $ciclista->create($data);
         return redirect()->route('ciclista.login');
     }
+    */
 }
