@@ -11,36 +11,37 @@
 <body>
     <div class="form-createPlan" id="form-createPlan">
         <h1>Crear plan de entrenamiento</h1>
-        <form>
+        <form method="POST" action="{{ route('plan.createPlan') }}">
+            @csrf
             <div class="form">
                 <label for="name">Nombre:</label>
-                <input type="text" id="name">
+                <input type="text" id="name" name="nombre" required>
             </div>
 
             <div class="form">
                 <label for="description">Descripción:</label>
-                <input type="text" id="description">
+                <input type="text" id="description" name="descripcion" required>
             </div>
 
             <div class="form">
                 <label for="start">Fecha de inicio:</label>
-                <input type="date" id="start">
+                <input type="date" id="start" name="fecha_inicio" required>
             </div>
 
             <div class="form">
                 <label for="end">Fecha de finalización:</label>
-                <input type="date" id="end">
+                <input type="date" id="end" name="fecha_fin" required>
             </div>
 
             <div class="form">
                 <label for="objective">Objetivo:</label>
-                <input type="text" id="objective">
+                <input type="text" id="objective" name="objetivo" required>
             </div>
 
             <div class="form form-switch">
                 <label for="active" class="switch-label">Activo:</label>
                 <label class="switch">
-                    <input type="checkbox" id="active">
+                    <input type="checkbox" id="active" name="activo" required>
                     <span class="slider round"></span>
                 </label>
             </div>

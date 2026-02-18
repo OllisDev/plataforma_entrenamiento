@@ -14,12 +14,12 @@ Route::get('/', function () {
     return view('main');
 })->middleware(['auth'])->name('main'); // middleware -> obligar solo a los ususarios autenticados acceder a la pagina principal, sino redirige al login
 
-Route::get('/plan', function () {
-    return view('plan');
-});
-
 Route::get('/plan/crear', function () {
     return view('createPlan');
+});
+
+Route::get('/plan', function () {
+    return view('plan');
 });
 
 Route::get('/sesion', function () {
@@ -64,11 +64,11 @@ Route::post('/login', [CiclistaController::class, 'login'])->name('cyclist.login
 Route::get('/bloque', [BloqueEntrenamientoController::class, 'listBlock'])->name('block.listBlock');
 
 // rutas para los planes de entrenamiento
-Route::get('/plan', [PlanEntrenamientoController::class, "listPlanes"])->name('plan.listPlanes');
-Route::post('/plan', [PlanEntrenamientoController::class, "createPlan"])->name('plan.createPlan');
+Route::get('/plan', [PlanEntrenamientoController::class, "listPlan"])->name('plan.listPlan');
+Route::post('/plan/crear', [PlanEntrenamientoController::class, "createPlan"])->name('plan.createPlan');
 
 // rutas para las sesiones de entrenamiento
-Route::get('/sesion', [SesionEntrenamientoController::class, 'listSesiones'])->name('sesiones.listSesiones');
+Route::get('/sesion', [SesionEntrenamientoController::class, 'listSesiones'])->name('session.listSession');
 
 // rutas para la sesion-plan
 Route::get('/sesionBloque', [SesionPlanController::class, 'listSesionPlan'])->name('sessionPlan.listSesionBloque');

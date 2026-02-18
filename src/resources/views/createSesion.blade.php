@@ -13,7 +13,7 @@
     <div class="form-createSesion" id="form-createSesion">
         <h1>Crear sesión de entrenamiento</h1>
         <form>
-            <div class="form">
+            <div class="form" method="POST" action="{{ route('session.listSession') }}">
                 <label for="name">Nombre:</label>
                 <input type="text" id="name">
             </div>

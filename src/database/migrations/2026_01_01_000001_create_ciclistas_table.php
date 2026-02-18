@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('email', 80)->nullable(false);
             $table->string('password', 60)->nullable(false);
             $table->rememberToken()->nullable();
+            $table->string('api_token', 80)->unique()->nullable();
         });
     }
 
