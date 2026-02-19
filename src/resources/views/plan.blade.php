@@ -19,17 +19,40 @@
                 <th>Fin</th>
                 <th>Objetivo</th>
                 <th>Activo</th>
+                <th>Acciones</th>
             </thead>
             <tbody>
                 @foreach ($planes as $plan)
-                    <tr>
-                        <td>{{ $plan->nombre }}</td>
-                        <td>{{ $plan->descripcion }}</td>
-                        <td>{{ $plan->fecha_inicio }}</td>
-                        <td>{{ $plan->fecha_fin }}</td>
-                        <td>{{ $plan->objetivo }}</td>
-                        <td>{{ $plan->activo ? 'Si' : 'No'}}</td>
-                    </tr>
+                <tr>
+                    <td>{{ $plan->nombre }}</td>
+                    <td>{{ $plan->descripcion }}</td>
+                    <td>{{ $plan->fecha_inicio }}</td>
+                    <td>{{ $plan->fecha_fin }}</td>
+                    <td>{{ $plan->objetivo }}</td>
+                    <td>{{ $plan->activo ? 'Si' : 'No'}}</td>
+                
+                     <td>
+
+                    <!-- BOTÓN EDITAR -->
+                    <a href="{{ route('plan.editPlan', $plan->id) }}"
+                       class="btn btn-warning btn-sm">
+                        Editar
+                    </a>
+
+                    <!-- BOTÓN ELIMINAR -->
+                    <form action="{{ route('plan.deletePlan', $plan->id) }}"
+                          method="POST"
+                          style="display:inline;">
+                        @csrf
+                        <button type="submit"
+                                class="btn btn-danger btn-sm"
+                                onclick="return confirm('¿Seguro que quieres eliminar este plan?')">
+                            Eliminar
+                        </button>
+                    </form>
+
+                    </td>
+                </tr>
 
                 @endforeach
             </tbody>

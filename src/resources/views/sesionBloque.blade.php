@@ -15,16 +15,35 @@
             <thead>
                 <th>Orden</th>
                 <th>Repeticiones</th>
+                <th>Acciones</th>
             </thead>
             <tbody>
                 @foreach ($sesionesPlan as $sesionPlan)
                 <tr>
                     <td>{{ $sesionPlan->orden }}</td>
                     <td>{{ $sesionPlan->repeticiones }}</td>
-                </tr>
 
+                    <td>
+                        <a href="{{ route('sesionBloque.edit', $sesionPlan->id) }}"
+                            class="btn btn-warning">
+                            Editar
+                        </a>
+
+                        <form action="{{ route('sesionBloque.delete', $sesionPlan->id) }}"
+                            method="POST"
+                            style="display:inline;">
+                            @csrf
+                            <button type="submit"
+                                onclick="return confirm('¿Seguro que deseas eliminar?')"
+                                class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
+
         </table>
     </div>
 </body>
