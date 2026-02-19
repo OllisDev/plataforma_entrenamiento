@@ -17,6 +17,7 @@ class Ciclista extends Authenticatable
         'peso_base',
         'altura_base',
         'email',
-        'password'
+        'password',
+        'api_token'
     ];
 }

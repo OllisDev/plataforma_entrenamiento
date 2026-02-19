@@ -17,29 +17,28 @@ Route::get('/user', function (Request $request) {
 // -- RUTAS PARA PROBAR LAS PETICIONES MEDIANTE API REST --
 
 // rutas para los bloques de entrenamiento
-Route::get('/bloque', [BloqueEntrenamientoController::class, 'listBlockAPI'])->name('blockAPI.listBlock');
-Route::post('/bloque/crear', [BloqueEntrenamientoController::class, 'createBlockAPI'])->name('blockAPI.createBlock');
-Route::get('/bloque/{bloque}', [BloqueEntrenamientoController::class, 'listBlockByIdAPI'])->name('blockAPI.listBlockById');
-Route::delete('/bloque/{bloque}/eliminar', [BloqueEntrenamientoController::class, 'deleteBlockAPI'])->name('blockAPI.deleteBlock');
+Route::middleware('auth:api')->get('/bloque', [BloqueEntrenamientoController::class, 'listBlockAPI'])->name('blockAPI.listBlock');
+Route::middleware('auth:api')->post('/bloque/crear', [BloqueEntrenamientoController::class, 'createBlockAPI'])->name('blockAPI.createBlock');
+Route::middleware('auth:api')->get('/bloque/{bloque}', [BloqueEntrenamientoController::class, 'listBlockByIdAPI'])->name('blockAPI.listBlockById');
+Route::middleware('auth:api')->delete('/bloque/{bloque}/eliminar', [BloqueEntrenamientoController::class, 'deleteBlockAPI'])->name('blockAPI.deleteBlock');
 
 // rutas para los planes de entrenamiento
-Route::get('/plan', [PlanEntrenamientoController::class, 'listPlanAPI'])->name('planAPI.listPlan');
+Route::middleware('auth:api')->get('/plan', [PlanEntrenamientoController::class, 'listPlanAPI'])->name('planAPI.listPlan');
 Route::middleware('auth:api')->post('/plan/crear', [PlanEntrenamientoController::class, 'createPlanAPI'])->name('planAPI.createPlan');
-Route::put('/plan/{plan}', [PlanEntrenamientoController::class, 'updatePlanAPI'])->name('planAPI.updatePlan');
-Route::delete('/plan/{plan}', [PlanEntrenamientoController::class, 'deleteBlockAPI'])->name('planAPI.deletePlan');
+Route::middleware('auth:api')->put('/plan/{plan}', [PlanEntrenamientoController::class, 'updatePlanAPI'])->name('planAPI.updatePlan');
+Route::middleware('auth:api')->delete('/plan/{plan}', [PlanEntrenamientoController::class, 'deletePlanAPI'])->name('planAPI.deletePlan');
 
 // rutas para las sesiones de entrenamiento
-Route::get('/sesion', [SesionEntrenamientoController::class, 'listSessionAPI'])->name('sessionAPI.listSession');
-Route::post('/sesion/crear', [SesionEntrenamientoController::class, 'createSessionAPI'])->name('sessionAPI.createSession');
-Route::delete('/sesion/{sesion}', [SesionEntrenamientoController::class, 'deleteSessionAPI'])->name('sessionAPI.deleteSession');
-Route::get('/sesion', [SesionEntrenamientoController::class, 'listSessionAPI'])->name('sessionAPI.listSession');
-Route::get('/sesion/{sesion}', [SesionEntrenamientoController::class, 'listSessionByIdAPI'])->name('sessionAPI.listSessionById');
+Route::middleware('auth:api')->get('/sesion', [SesionEntrenamientoController::class, 'listSessionAPI'])->name('sessionAPI.listSession');
+Route::middleware('auth:api')->post('/sesion/crear', [SesionEntrenamientoController::class, 'createSessionAPI'])->name('sessionAPI.createSession');
+Route::middleware('auth:api')->delete('/sesion/{sesion}', [SesionEntrenamientoController::class, 'deleteSessionAPI'])->name('sessionAPI.deleteSession');
+Route::middleware('auth:api')->get('/sesion/{sesion}', [SesionEntrenamientoController::class, 'listSessionByIdAPI'])->name('sessionAPI.listSessionById');
 
 // rutas para los resultados de entrenamiento
 Route::post('/resultado/crear', [ResultadosController::class, "createResultAPI"])->name('resultAPI.createResult');
 Route::get('/resultado/{resultado}', [ResultadosController::class, "listResultByIdAPI"])->name('resultAPI.listResultById');
 
 // rutas para la sesion-plan entrenamiento
-Route::get('/sesionBloque', [SesionPlanController::class, 'listSessionPlanAPI'])->name('sessionPlanAPI.listSessionPlan');
-Route::post('/sesionBloque/crear', [SesionPlanController::class, 'createSessionPlanAPI'])->name('sessionPlanAPI.createSessionPlan');
-Route::delete('/sesionBloque/{sesionPlan}', [SesionPlanController::class, 'deleteSessionPlanAPI'])->name('sessionPlanAPI.deleteSessionPlan');
+Route::get('/sesionBloque', [SesionPlanController::class, 'listSessionBlockAPI'])->name('sessionPlanAPI.listSessionBlock');
+Route::post('/sesionBloque/crear', [SesionPlanController::class, 'createSessionBlockAPI'])->name('sessionPlanAPI.createSessionBlock');
+Route::delete('/sesionBloque/{sesionPlan}', [SesionPlanController::class, 'deleteSessionBlockAPI'])->name('sessionPlanAPI.deleteSessionBlock');

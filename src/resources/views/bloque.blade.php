@@ -25,33 +25,26 @@
             </thead>
             <tbody>
                 @foreach ($bloques as $bloque)
-                <tr>
-                    <td>{{ $bloque->nombre }}</td>
-                    <td>{{ $bloque->descripcion }}</td>
-                    <td>{{ $bloque->tipo }}</td>
-                    <td>{{ $bloque->duracion_estimada }}</td>
-                    <td>{{ $bloque->potencia_pct_min }}</td>
-                    <td>{{ $bloque->potencia_pct_max }}</td>
-                    <td>{{ $bloque->pulso_reserva_pct }}</td>
-                    <td>{{ $bloque->comentario }}</td>
-                    <td>
-                        <a href="{{ route('bloque.edit', $bloque->id) }}"
-                            class="btn btn-warning btn-sm">
-                            Editar
-                        </a>
-
-                        <form action="{{ route('bloque.delete', $bloque->id) }}"
-                            method="POST"
-                            style="display:inline;">
-                            @csrf
-                            <button type="submit"
-                                class="btn btn-danger btn-sm"
-                                onclick="return confirm('¿Seguro que quieres eliminar este bloque?')">
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ $bloque->nombre }}</td>
+                        <td>{{ $bloque->descripcion }}</td>
+                        <td>{{ $bloque->tipo }}</td>
+                        <td>{{ $bloque->duracion_estimada }}</td>
+                        <td>{{ $bloque->potencia_pct_min }}</td>
+                        <td>{{ $bloque->potencia_pct_max }}</td>
+                        <td>{{ $bloque->pulso_reserva_pct }}</td>
+                        <td>{{ $bloque->comentario }}</td>
+                        <td>
+                            <form action="{{ route('block.deleteBlock', $bloque->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('¿Seguro que quieres eliminar este bloque?')">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
 
                 @endforeach
             </tbody>

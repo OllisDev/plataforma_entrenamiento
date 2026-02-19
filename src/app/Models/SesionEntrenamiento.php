@@ -11,4 +11,11 @@ class SesionEntrenamiento extends Model
     protected $table = 'sesion_entrenamiento';
 
     public $timestamps = false;
+
+    protected $fillable = [
+        'id_plan',
+        'nombre',
+        'descripcion',
+        'completada'
+    ];
 }

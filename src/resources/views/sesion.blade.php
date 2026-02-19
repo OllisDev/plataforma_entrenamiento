@@ -21,29 +21,22 @@
             </thead>
             <tbody>
                 @foreach ($sesiones as $sesion)
-                <tr>
-                    <td>{{ $sesion->nombre }}</td>
-                    <td>{{ $sesion->descripcion }}</td>
-                    <td>{{ $sesion->completada ? 'Si' : 'No' }}</td>
-                    <td>
-                        <a href="{{ route('sesion.editSesion', $sesion->id) }}"
-                            class="btn btn-warning btn-sm">
-                            Editar
-                        </a>
+                    <tr>
+                        <td>{{ $sesion->nombre }}</td>
+                        <td>{{ $sesion->descripcion }}</td>
+                        <td>{{ $sesion->completada ? 'Si' : 'No' }}</td>
+                        <td>
+                            <form action="{{ route('session.deleteSession', $sesion->id) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('¿Seguro que deseas eliminar?')">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </td>
 
-                        <form action="{{ route('sesion.deleteSesion', $sesion->id) }}"
-                            method="POST"
-                            style="display:inline;">
-                            @csrf
-                            <button type="submit"
-                                class="btn btn-danger btn-sm"
-                                onclick="return confirm('¿Seguro que deseas eliminar?')">
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
-
-                </tr>
+                    </tr>
 
                 @endforeach
             </tbody>
