@@ -104,6 +104,38 @@ body {
     transform: translateX(16px);
 }
 
+.mensaje-container {
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1c6b4b;
+    background: #e2f0e8;
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    display: none;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.15);
+    text-align: center;
+    animation: fadeIn 0.5s;
+}
+
+.mensaje-container.error {
+    color: #ffffff;
+    background: #fd3c3c;
+    border: 1px solid transparent;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .btnCreatePlan {
     border-radius: 10px;
     border: solid transparent;

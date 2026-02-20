@@ -20,7 +20,7 @@ Route::get('/plan/crear', function () {
 
 Route::get('/plan', function () {
     return view('plan');
-});
+})->name('plan.view');
 
 Route::get('/sesion', function () {
     return view('sesion');
@@ -66,7 +66,7 @@ Route::post('/bloque/crear', [BloqueEntrenamientoController::class, "createBlock
 Route::post('/bloque/{bloque}/eliminar', [BloqueEntrenamientoController::class, "deleteBlockAPI"])->name('block.deleteBlock');
 
 // rutas para los planes de entrenamiento
-Route::get('/plan', [PlanEntrenamientoController::class, "listPlan"])->name('plan.listPlan');
+Route::get('/plan/listar', [PlanEntrenamientoController::class, "listPlanAPI"])->name('plan.listPlan');
 Route::post('/plan/crear', [PlanEntrenamientoController::class, "createPlanAPI"])->name('plan.createPlan');
 Route::get('/plan/{plan}/editar', [PlanEntrenamientoController::class, "editPlan"])->name('plan.editPlan');
 Route::put('/plan/{plan}/actualizar', [PlanEntrenamientoController::class, "updatePlanAPI"])->name('plan.updatePlan');
