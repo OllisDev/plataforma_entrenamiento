@@ -6,49 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma de entrenamiento - Crear plan de entrenamiento</title>
     <link rel="stylesheet" href="{{ asset('css/createPlan.css') }}">
+    <script src="{{ asset('js/createPlan.js') }}" defer></script>
 </head>
 
 <body>
     <div class="form-createPlan" id="form-createPlan">
         <h1>Crear plan de entrenamiento</h1>
-        <form method="POST" action="{{ route('plan.createPlan') }}">
+        <form>
             @csrf
             <div class="form">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="nombre" required>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
             </div>
 
             <div class="form">
-                <label for="description">Descripción:</label>
-                <input type="text" id="description" name="descripcion" required>
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion">
             </div>
 
             <div class="form">
-                <label for="start">Fecha de inicio:</label>
-                <input type="date" id="start" name="fecha_inicio" required>
+                <label for="fechaInicio">Fecha de inicio:</label>
+                <input type="date" id="fechaInicio" name="fecha_inicio">
             </div>
 
             <div class="form">
-                <label for="end">Fecha de finalización:</label>
-                <input type="date" id="end" name="fecha_fin" required>
+                <label for="fechaFin">Fecha de finalización:</label>
+                <input type="date" id="fechaFin" name="fecha_fin">
             </div>
 
             <div class="form">
-                <label for="objective">Objetivo:</label>
-                <input type="text" id="objective" name="objetivo" required>
+                <label for="objectivo">Objetivo:</label>
+                <input type="text" id="objetivo" name="objetivo">
             </div>
 
             <div class="form form-switch">
-                <label for="active" class="switch-label">Activo:</label>
+                <label for="activo" class="switch-label">Activo:</label>
                 <label class="switch">
-                    <input type="checkbox" id="active" name="activo" required>
+                    <input type="checkbox" id="activo" name="activo">
                     <span class="slider round"></span>
                 </label>
             </div>
 
-            <input type="submit" value="Crear" id="btnCreatePlan" class="btnCreatePlan">
+            <input type="button" value="Crear" id="btnCreatePlan" class="btnCreatePlan">
 
         </form>
+
+        <div id="mensaje-container" class="mensaje"></div>
     </div>
 </body>
 

@@ -63,21 +63,19 @@ Route::post('/login', [CiclistaController::class, 'login'])->name('cyclist.login
 // rutas para los bloques de entrenamiento
 Route::get('/bloque', [BloqueEntrenamientoController::class, 'listBlock'])->name('block.listBlock');
 Route::post('/bloque/crear', [BloqueEntrenamientoController::class, "createBlockAPI"])->name('block.createBlock');
-Route::get('/bloque/{bloque}/editar', [BloqueEntrenamientoController::class, "editBlock"])->name('block.editBlock');
 Route::post('/bloque/{bloque}/eliminar', [BloqueEntrenamientoController::class, "deleteBlockAPI"])->name('block.deleteBlock');
 
 // rutas para los planes de entrenamiento
 Route::get('/plan', [PlanEntrenamientoController::class, "listPlan"])->name('plan.listPlan');
 Route::post('/plan/crear', [PlanEntrenamientoController::class, "createPlanAPI"])->name('plan.createPlan');
 Route::get('/plan/{plan}/editar', [PlanEntrenamientoController::class, "editPlan"])->name('plan.editPlan');
-Route::post('/plan/{plan}/actualizar', [PlanEntrenamientoController::class, "updatePlanAPI"])->name('plan.updatePlan');
-Route::post('/plan/{plan}/eliminar', [PlanEntrenamientoController::class, "deletePlanAPI"])->name('plan.deletePlan');
-
+Route::put('/plan/{plan}/actualizar', [PlanEntrenamientoController::class, "updatePlanAPI"])->name('plan.updatePlan');
+Route::delete('/plan/{plan}/eliminar', [PlanEntrenamientoController::class, "deletePlanAPI"])->name('plan.deletePlan');
 
 // rutas para las sesiones de entrenamiento
 Route::get('/sesion', [SesionEntrenamientoController::class, 'listSesiones'])->name('session.listSession');
 Route::post('/sesion/crear', [SesionEntrenamientoController::class, 'createSessionAPI'])->name('session.createSession');
-Route::post('/sesion/{sesion}/eliminar', [SesionEntrenamientoController::class, "deleteSessionAPI"])->name('session.deleteSession');
+Route::delete('/sesion/{sesion}/eliminar', [SesionEntrenamientoController::class, "deleteSessionAPI"])->name('session.deleteSession');
 
 // rutas para la sesion-plan
 Route::get('/sesionBloque', [SesionPlanController::class, 'listSesionPlan'])->name('sessionPlan.listSesionBloque');

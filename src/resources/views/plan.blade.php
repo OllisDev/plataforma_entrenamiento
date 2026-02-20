@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma de entrenamiento - Planes de entrenamiento</title>
-    <link rel="stylesheet" href="/css/plan.css">
+    <link rel="stylesheet" href="{{ asset('css/plan.css') }}">
+    <script src="{{ asset('js/listPlan.js') }}"></script>
+    <script src="{{ asset('js/deletePlan.js') }}"></script>
 </head>
 
 <body>
@@ -32,24 +34,16 @@
                         <td>{{ $plan->activo ? 'Si' : 'No'}}</td>
 
                         <td>
-
-                            <!-- BOTÓN EDITAR -->
                             <a href="{{ route('plan.editPlan', $plan->id) }}" class="btn btn-warning btn-sm">
                                 Editar
                             </a>
-
-                            <!-- BOTÓN ELIMINAR -->
-                            <form action="{{ route('plan.deletePlan', $plan->id) }}" method="POST" style="display:inline;">
+                            <br>
+                            <form style="display:inline;" id="form" data-plan-id="{{ $plan->id }}">
                                 @csrf
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('¿Seguro que quieres eliminar este plan?')">
-                                    Eliminar
-                                </button>
+                                <input type="button" class="btn btn-danger btn-sm btnEliminar" value="Eliminar">
                             </form>
-
                         </td>
                     </tr>
-
                 @endforeach
             </tbody>
         </table>

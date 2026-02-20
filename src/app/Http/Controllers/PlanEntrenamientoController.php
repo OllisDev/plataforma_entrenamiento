@@ -152,7 +152,7 @@ class PlanEntrenamientoController extends Controller
 
             $response = [
                 'response' => 200,
-                'success' => false,
+                'success' => true,
                 'status' => 'ok',
                 'message' => 'El plan de entrenamiento ha sido creado correctamente.'
             ];

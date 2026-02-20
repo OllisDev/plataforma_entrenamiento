@@ -50,6 +50,26 @@ function cargarContenido(url) {
     fetch(url)
         .then((response) => response.text())
         .then((html) => {
-            document.getElementById("content").innerHTML = html;
+            const contentDiv = document.getElementById("content");
+            contentDiv.innerHTML = html;
+
+            const scripts = contentDiv.querySelectorAll("script");
+
+            scripts.forEach((oldScript) => {
+                const newScript = document.createElement("script");
+
+                Array.from(oldScript.attributes).forEach((attr) => {
+                    newScript.setAttribute(attr.name, attr.value);
+                });
+
+                if (oldScript.innerHTML) {
+                    newScript.appendChild(
+                        document.createTextNode(oldScript.innerHTML),
+                    );
+                }
+
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+            // ------------------------------------------
         });
 }
