@@ -49,10 +49,7 @@ function validarCrear() {
                     false,
                 );
             } else {
-                mostrarMensaje(
-                    "Error al crear el plan de entrenamiento",
-                    false,
-                );
+                mostrarMensaje("Error al crear el plan de entrenamiento", true);
             }
         })
         .catch(() => {
