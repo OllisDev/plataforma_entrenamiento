@@ -18,7 +18,7 @@ class SesionEntrenamientoController extends Controller
     {
         try {
             // SELECT nombre, descripcion, completada FROM sesion_entrenamiento
-            $sesiones = $sesion->select('nombre', 'descripcion', 'completada')->get();
+            $sesiones = $sesion->select('id', 'nombre', 'descripcion', 'completada')->get();
 
             if ($sesiones) {
                 $response = [

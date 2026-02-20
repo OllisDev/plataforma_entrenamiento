@@ -24,7 +24,7 @@ Route::get('/plan', function () {
 
 Route::get('/sesion', function () {
     return view('sesion');
-});
+})->name('sesion.view');
 
 Route::get('/sesion/crear', function () {
     return view('createSesion');
@@ -73,7 +73,7 @@ Route::put('/plan/{plan}/actualizar', [PlanEntrenamientoController::class, "upda
 Route::delete('/plan/{plan}/eliminar', [PlanEntrenamientoController::class, "deletePlanAPI"])->name('plan.deletePlan');
 
 // rutas para las sesiones de entrenamiento
-Route::get('/sesion', [SesionEntrenamientoController::class, 'listSesiones'])->name('session.listSession');
+Route::get('/sesion/listar', [SesionEntrenamientoController::class, 'listSessionAPI'])->name('session.listSession');
 Route::post('/sesion/crear', [SesionEntrenamientoController::class, 'createSessionAPI'])->name('session.createSession');
 Route::delete('/sesion/{sesion}/eliminar', [SesionEntrenamientoController::class, "deleteSessionAPI"])->name('session.deleteSession');
 
