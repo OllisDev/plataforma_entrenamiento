@@ -1,126 +1,183 @@
-comenzar();
+(() => {
+    let offset = 0;
+    const limit = 10;
+    let cargando = false;
+    let hayMasDatos = true;
 
-function comenzar() {
-    listarPlanes();
-}
+    comenzar();
 
-function listarPlanes() {
-    let url = "/plan/listar";
-    fetch(url, {
-        method: "GET",
-        headers: {
-            "Content-type": "application/json",
-            Accept: "application/json",
-        },
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            crearTabla(data.plan);
-            setTimeout(listarPlanes, 60000); // refresca la tabla cada 60 segundos sin que el usuario tenga que recargar la pagina
-        })
-        .catch((error) => {
-            console.log(error);
-            alert("Error al conectar con el servidor");
-        });
-}
+    function comenzar() {
+        offset = 0;
+        cargando = false;
+        hayMasDatos = true;
+        scroll();
+        listarPlanes();
 
-function crearTabla(planes) {
-    let divTable = document.getElementById("table-plan");
-
-    // verificar si el elemento no existe y si no existe se sale para que el programa detecte que ya no estamos interactuando con la tabla
-    if (!divTable) {
-        return;
+        // actualizar tabla cada minuto sin que el usuario tenga que recargar la pagina
+        setInterval(() => {
+            offset = 0;
+            hayMasDatos = true;
+            cargando = false;
+            listarPlanes();
+        }, 60000);
     }
 
-    divTable.innerHTML = "";
+    function scroll() {
+        let divTable = document.getElementById("table-plan");
+        if (divTable) {
+            divTable.addEventListener("scroll", function () {
+                if (
+                    divTable.scrollTop + divTable.clientHeight >=
+                    divTable.scrollHeight - 10
+                ) {
+                    listarPlanes();
+                }
+            });
+        }
+    }
 
-    let table = document.createElement("table");
-    table.setAttribute("class", "table-style");
+    function listarPlanes() {
+        if (cargando || !hayMasDatos) return;
 
-    let thead = document.createElement("thead");
-    let trHead = document.createElement("tr");
+        cargando = true;
 
-    [
-        "Nombre",
-        "Descripción",
-        "Inicio",
-        "Fin",
-        "Objetivo",
-        "Activo",
-        "Acciones",
-    ].forEach((col) => {
-        let th = document.createElement("th");
-        th.textContent = col;
-        trHead.appendChild(th);
-    });
-    thead.appendChild(trHead);
-    table.appendChild(thead);
+        let url = `/plan/listar?offset=${offset}&limit=${limit}`;
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                Accept: "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data.plan || data.plan.length === 0) {
+                    hayMasDatos = false;
+                    return;
+                }
 
-    let tbody = document.createElement("tbody");
+                if (offset === 0) {
+                    crearTabla();
+                }
+                agregarFilas(data.plan);
 
-    planes.forEach((plan) => {
-        let tr = document.createElement("tr");
+                if (data.plan.length < limit) {
+                    hayMasDatos = false;
+                }
+                offset += limit;
+            })
+            .catch((error) => {
+                console.log(error);
+                alert("Error al conectar con el servidor");
+            })
+            .finally(() => {
+                cargando = false;
+            });
+    }
 
-        let datos = [
-            plan.nombre,
-            plan.descripcion,
-            plan.fecha_inicio,
-            plan.fecha_fin,
-            plan.objetivo,
-            plan.activo ? "Si" : "No",
-        ];
+    function crearTabla() {
+        let divTable = document.getElementById("table-plan");
+        if (!divTable) {
+            return;
+        }
+        divTable.innerHTML = "";
 
-        datos.forEach((texto) => {
-            let td = document.createElement("td");
-            td.textContent = texto;
-            tr.appendChild(td);
+        let table = document.createElement("table");
+        table.setAttribute("class", "table-style");
+
+        let thead = document.createElement("thead");
+        let trHead = document.createElement("tr");
+
+        [
+            "Nombre",
+            "Descripción",
+            "Inicio",
+            "Fin",
+            "Objetivo",
+            "Activo",
+            "Acciones",
+        ].forEach((col) => {
+            let th = document.createElement("th");
+            th.textContent = col;
+            trHead.appendChild(th);
         });
+        thead.appendChild(trHead);
+        table.appendChild(thead);
 
-        let tdAcciones = document.createElement("td");
+        let tbody = document.createElement("tbody");
+        tbody.id = "tbody";
 
-        let btnEditar = document.createElement("a");
-        btnEditar.href = `/plan/${plan.id}/editar`;
-        btnEditar.className = "btn btn-warning btn-sm";
-        btnEditar.textContent = "Editar";
-        tdAcciones.appendChild(btnEditar);
+        table.appendChild(tbody);
+        divTable.appendChild(table);
+    }
 
-        tdAcciones.appendChild(document.createElement("br"));
-
-        let formEliminar = document.createElement("form");
-        formEliminar.setAttribute("id", "form");
-        formEliminar.style.display = "inline";
-
-        let csrfToken = document.querySelector(
-            'meta[name="csrf-token"]',
-        )?.content;
-        if (csrfToken) {
-            let inputCsrf = document.createElement("input");
-            inputCsrf.type = "hidden";
-            inputCsrf.name = "_token";
-            inputCsrf.value = csrfToken;
-            formEliminar.appendChild(inputCsrf);
+    function agregarFilas(planes) {
+        let tbody = document.getElementById("tbody");
+        if (!tbody) {
+            return;
         }
 
-        let btnEliminar = document.createElement("input");
-        btnEliminar.type = "button";
-        btnEliminar.className = "btn btn-danger btn-sm btnEliminar";
-        btnEliminar.value = "Eliminar";
+        planes.forEach((plan) => {
+            let tr = document.createElement("tr");
 
-        btnEliminar.onclick = function () {
-            if (typeof eliminarPlan === "function") {
-                eliminarPlan(plan.id, this);
-            } else {
-                console.error("Función eliminarPlan no definida");
+            let datos = [
+                plan.nombre,
+                plan.descripcion,
+                plan.fecha_inicio,
+                plan.fecha_fin,
+                plan.objetivo,
+                plan.activo ? "Si" : "No",
+            ];
+
+            datos.forEach((texto) => {
+                let td = document.createElement("td");
+                td.textContent = texto;
+                tr.appendChild(td);
+            });
+
+            let tdAcciones = document.createElement("td");
+
+            let btnEditar = document.createElement("a");
+            btnEditar.href = `/plan/${plan.id}/editar`;
+            btnEditar.className = "btn btn-warning btn-sm";
+            btnEditar.textContent = "Editar";
+            tdAcciones.appendChild(btnEditar);
+
+            tdAcciones.appendChild(document.createElement("br"));
+
+            let formEliminar = document.createElement("form");
+            formEliminar.setAttribute("id", "form");
+            formEliminar.style.display = "inline";
+
+            let csrfToken = document.querySelector(
+                'meta[name="csrf-token"]',
+            )?.content;
+            if (csrfToken) {
+                let inputCsrf = document.createElement("input");
+                inputCsrf.type = "hidden";
+                inputCsrf.name = "_token";
+                inputCsrf.value = csrfToken;
+                formEliminar.appendChild(inputCsrf);
             }
-        };
 
-        formEliminar.appendChild(btnEliminar);
-        tdAcciones.appendChild(formEliminar);
+            let btnEliminar = document.createElement("input");
+            btnEliminar.type = "button";
+            btnEliminar.className = "btn btn-danger btn-sm btnEliminar";
+            btnEliminar.value = "Eliminar";
 
-        tr.appendChild(tdAcciones);
-        tbody.appendChild(tr);
-    });
+            btnEliminar.onclick = function () {
+                if (typeof eliminarPlan === "function") {
+                    eliminarPlan(plan.id, this);
+                } else {
+                    console.error("Función eliminarPlan no definida");
+                }
+            };
 
-    table.appendChild(tbody);
-    divTable.appendChild(table);
-}
+            formEliminar.appendChild(btnEliminar);
+            tdAcciones.appendChild(formEliminar);
+
+            tr.appendChild(tdAcciones);
+            tbody.appendChild(tr);
+        });
+    }
+})();

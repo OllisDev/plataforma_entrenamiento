@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class PlanEntrenamientoController extends Controller
 {
-    public function listPlanAPI(PlanEntrenamiento $plan)
+    public function listPlanAPI(PlanEntrenamiento $plan, Request $request)
     {
         try {
+            $offset = $request->query('offset', 0);
+            $limit = $request->query('limit', 10);
             // SELECT id, nombre, descripcion, fecha_inicio, fecha_fin, objetivo, activo FROM plan_entrenamiento
-            $planes = $plan->where('id_ciclista', Auth::id())->select('id', 'nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'objetivo', 'activo')->get();
+            $planes = $plan->where('id_ciclista', Auth::id())
+                ->select('id', 'nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'objetivo', 'activo')
+                ->orderBy('id', 'desc')
+                ->skip($offset)
+                ->take($limit)
+                ->get();
 
             if ($planes) {
                 $response = [
