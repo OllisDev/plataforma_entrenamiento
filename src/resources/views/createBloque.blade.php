@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Plataforma de entrenamiento - Crear bloque de entrenamiento</title>
     <link rel="stylesheet" href="{{ asset('css/createBloque.css') }}">
+    <script src="{{ asset('js/createBloque.js') }}"></script>
 </head>
 
 <body>
@@ -13,54 +15,54 @@
         <h1>Crear bloque de entrenamiento</h1>
         <form>
             <div class="form">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre">
             </div>
 
             <div class="form">
-                <label for="description">Descripción:</label>
-                <input type="text" id="description">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion">
             </div>
 
             <div class="form">
-                <label for="type">Tipo:</label>
-                <select id="type" class="type">
-                    <option>Rodaje</option>
-                    <option>Intervalos</option>
-                    <option>Fuerza</option>
-                    <option>Recuperación</option>
-                    <option>Test</option>
-                </select>
+                <label for="tipo">Tipo:</label>
+                <select id="select-tipo" class="type"></select>
             </div>
 
             <div class="form">
-                <label for="duration">Duración estimada:</label>
-                <input type="time" id="duration">
+                <label for="duracionEstimada">Duración estimada:</label>
+                <input type="time" id="duracionEstimada">
             </div>
 
             <div class="form">
-                <label for="pot_min">Potencia mínima:</label>
-                <input type="number" id="pot_min">
+                <label for="potenciaMinima">Potencia mínima:</label>
+                <input type="number" id="potenciaMinima">
             </div>
 
             <div class="form">
-                <label for="pot_max">Potencia máxima:</label>
-                <input type="number" id="pot_max">
+                <label for="potenciaMaxima">Potencia máxima:</label>
+                <input type="number" id="potenciaMaxima">
             </div>
 
             <div class="form">
-                <label for="pulse">Pulso:</label>
-                <input type="number" id="pulse">
+                <label for="pulsoPctMax">% Pulso máximo:</label>
+                <input type="number" id="pulsoPctMax" step="0.01">
             </div>
 
             <div class="form">
-                <label for="comment">Comentario:</label>
-                <input type="text" id="comment">
+                <label for="pulsoReservaPct">% Pulso Reserva:</label>
+                <input type="number" id="pulsoReservaPct" step="0.01">
             </div>
 
-            <input type="submit" value="Crear" id="btnCreateBloque" class="btnCreateBloque">
+            <div class="form">
+                <label for="comentario">Comentario:</label>
+                <input type="text" id="comentario">
+            </div>
 
+            <input type="button" value="Crear" id="btnCreateBloque" class="btnCreateBloque">
         </form>
+
+        <div id="mensaje-container" class="mensaje"></div>
     </div>
 </body>
 

@@ -18,7 +18,7 @@ class BloqueEntrenamientoController extends Controller
     {
         try {
             // SELECT nombre, descripcion, tipo, duracion_estimada, potencia_pct_min, potencia_pct_max, pulso_reserva_pct, comentario FROM bloque_entrenamiento
-            $bloques = $bloque->select('id', 'nombre', 'descripcion', 'tipo', 'duracion_estimada', 'potencia_pct_min', 'potencia_pct_max', 'pulso_reserva_pct', 'comentario')->get();
+            $bloques = $bloque->select('id', 'nombre', 'descripcion', 'tipo', 'duracion_estimada', 'potencia_pct_min', 'potencia_pct_max', 'pulso_pct_max', 'comentario')->get();
 
             if ($bloques) {
                 $response = [
@@ -135,7 +135,7 @@ class BloqueEntrenamientoController extends Controller
 
             $response = [
                 'response' => 200,
-                'success' => false,
+                'success' => true,
                 'status' => 'ok',
                 'message' => 'El bloque de entrenamiento se ha eliminado correctamente.'
             ];

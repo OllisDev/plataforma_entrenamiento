@@ -63,7 +63,7 @@ Route::post('/login', [CiclistaController::class, 'login'])->name('cyclist.login
 // rutas para los bloques de entrenamiento
 Route::get('/bloque/listar', [BloqueEntrenamientoController::class, 'listBlockAPI'])->name('block.listBlock');
 Route::post('/bloque/crear', [BloqueEntrenamientoController::class, "createBlockAPI"])->name('block.createBlock');
-Route::post('/bloque/{bloque}/eliminar', [BloqueEntrenamientoController::class, "deleteBlockAPI"])->name('block.deleteBlock');
+Route::delete('/bloque/{bloque}/eliminar', [BloqueEntrenamientoController::class, "deleteBlockAPI"])->name('block.deleteBlock');
 
 // rutas para los planes de entrenamiento
 Route::get('/plan/listar', [PlanEntrenamientoController::class, "listPlanAPI"])->name('plan.listPlan');
