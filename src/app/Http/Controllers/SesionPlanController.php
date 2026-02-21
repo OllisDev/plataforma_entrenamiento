@@ -7,6 +7,41 @@ use Illuminate\Http\Request;
 
 class SesionPlanController extends Controller
 {
+    /*public function listSesionPlan(SesionBloque $sesionPlan)
+    {
+        // SELECT orden, repeticiones FROM sesion_bloque
+        $sesionesPlan = $sesionPlan->select('id', 'orden', 'repeticiones')->get();
+        return view('sesionBloque', compact('sesionesPlan'));
+    }*/
+    public function listSesionPlan(Request $request)
+    {
+        $sesionesBloque = SesionBloque::select('id', 'orden', 'repeticiones')
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('sesionBloque_rows', compact('sesionesBloque'))->render(),
+                'last_page' => $sesionesBloque->lastPage()
+            ]);
+        }
+
+        return view('sesionBloque', compact('sesionesBloque'));
+    }
+
+    public function cargarMasSesionBloque(Request $request)
+    {
+        $page = $request->get('page', 1);
+        $sesionesBloque = SesionBloque::select('id', 'orden', 'repeticiones')
+            ->orderBy('id', 'desc')
+            ->paginate(5, ['*'], 'page', $page);
+
+        return response()->json([
+            'html' => view('sesionBloque_rows', compact('sesionesBloque'))->render(),
+            'last_page' => $sesionesBloque->lastPage()
+        ]);
+    }
+
     public function listSessionBlockAPI(SesionBloque $sesionBloque)
     {
         try {

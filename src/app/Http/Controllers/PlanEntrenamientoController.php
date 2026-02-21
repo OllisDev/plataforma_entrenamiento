@@ -7,6 +7,35 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class PlanEntrenamientoController extends Controller
 {
+    public function listPlanes(Request $request)
+{
+    $planes = PlanEntrenamiento::select('id', 'nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'objetivo', 'activo')
+        ->orderBy('id', 'desc')
+        ->paginate(5);
+
+    if ($request->ajax()) {
+        return response()->json([
+            'html' => view('plan_entrenamiento_rows', compact('planes'))->render(),
+            'last_page' => $planes->lastPage()
+        ]);
+    }
+
+    return view('plan', compact('planes'));
+}
+
+public function cargarMasPlanes(Request $request)
+{
+    $page = $request->get('page', 1);
+    $planes = PlanEntrenamiento::select('id', 'nombre', 'descripcion', 'fecha_inicio', 'fecha_fin', 'objetivo', 'activo')
+        ->orderBy('id', 'desc')
+        ->paginate(5, ['*'], 'page', $page);
+
+    return response()->json([
+        'html' => view('plan_entrenamiento_rows', compact('planes'))->render(),
+        'last_page' => $planes->lastPage()
+    ]);
+}
+    
     public function listPlanAPI(PlanEntrenamiento $plan)
     {
         try {

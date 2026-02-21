@@ -11,9 +11,24 @@ body {
 }
 
 
+
+
 .title {
     text-align: center;
 }
+
+.table-container {
+    height: 500px;            /* Altura para scroll vertical */
+    overflow-y: auto;         /* Scroll vertical */
+    overflow-x: auto;         /* Scroll horizontal si la tabla es ancha */
+    margin: 32px auto;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(41, 44, 255, 0.10);
+    padding: 24px;
+}
+
 
 
 .table-container {
@@ -80,3 +95,4 @@ body {
         font-size: 0.95rem;
     }
 }
+

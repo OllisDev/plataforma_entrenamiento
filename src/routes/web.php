@@ -62,11 +62,16 @@ Route::post('/login', [CiclistaController::class, 'login'])->name('cyclist.login
 
 // rutas para los bloques de entrenamiento
 Route::get('/bloque/listar', [BloqueEntrenamientoController::class, 'listBlockAPI'])->name('block.listBlock');
+
+Route::get('/bloque/cargar', [BloqueEntrenamientoController::class, 'cargarMasBloques'])->name('bloque.cargar');
+
 Route::post('/bloque/crear', [BloqueEntrenamientoController::class, "createBlockAPI"])->name('block.createBlock');
 Route::delete('/bloque/{bloque}/eliminar', [BloqueEntrenamientoController::class, "deleteBlockAPI"])->name('block.deleteBlock');
 
 // rutas para los planes de entrenamiento
 Route::get('/plan/listar', [PlanEntrenamientoController::class, "listPlanAPI"])->name('plan.listPlan');
+Route::get('/plan', [PlanEntrenamientoController::class, 'listPlanes'])->name('plan.listPlanes');
+Route::get('/plan/cargar', [PlanEntrenamientoController::class, 'cargarMasPlanes'])->name('plan.cargar');
 Route::post('/plan/crear', [PlanEntrenamientoController::class, "createPlanAPI"])->name('plan.createPlan');
 Route::get('/plan/{plan}/editar', [PlanEntrenamientoController::class, "editPlan"])->name('plan.editPlan');
 Route::put('/plan/{plan}/actualizar', [PlanEntrenamientoController::class, "updatePlanAPI"])->name('plan.updatePlan');
@@ -74,11 +79,15 @@ Route::delete('/plan/{plan}/eliminar', [PlanEntrenamientoController::class, "del
 
 // rutas para las sesiones de entrenamiento
 Route::get('/sesion/listar', [SesionEntrenamientoController::class, 'listSessionAPI'])->name('session.listSession');
+Route::get('/sesion/cargar', [SesionEntrenamientoController::class, 'cargarMas'])->name('sesion.cargar'); // <-- NUEVA
 Route::post('/sesion/crear', [SesionEntrenamientoController::class, 'createSessionAPI'])->name('session.createSession');
 Route::delete('/sesion/{sesion}/eliminar', [SesionEntrenamientoController::class, "deleteSessionAPI"])->name('session.deleteSession');
 
 // rutas para la sesion-plan
 Route::get('/sesionBloque/listar', [SesionPlanController::class, 'listSessionBlockAPI'])->name('sessionPlan.listSesionBloque');
+
+Route::get('/sesionBloque/cargar', [SesionPlanController::class, 'cargarMasSesionBloque'])->name('sesionBloque.cargar');
+
 Route::post('/sesionBloque/crear', [SesionPlanController::class, 'createSessionBlockAPI'])->name('sessionPlan.createSessionBlock');
 Route::delete('/sesionBloque/{sesion}/eliminar', [SesionPlanController::class, "deleteSessionBlockAPI"])->name('sessionPlan.deleteSessionBlock');
 

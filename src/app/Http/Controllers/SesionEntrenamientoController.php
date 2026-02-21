@@ -7,12 +7,43 @@ use Illuminate\Http\Request;
 
 class SesionEntrenamientoController extends Controller
 {
-    public function listSesiones(SesionEntrenamiento $sesion)
+    /*public function listSesiones(SesionEntrenamiento $sesion)
     {
         // SELECT nombre, descripcion, completada FROM sesion_entrenamiento
         $sesiones = $sesion->select('id', 'nombre', 'descripcion', 'completada')->get();
         return view('sesion', compact('sesiones'));
+    }*/
+
+    public function listSesiones(Request $request, SesionEntrenamiento $sesion)
+   {
+    $sesiones = SesionEntrenamiento::select('id', 'nombre', 'descripcion', 'completada')
+        ->orderBy('id', 'desc')
+        ->paginate(5);
+
+    // Si la petición espera JSON (fetch) O tiene el parámetro 'page'
+     if ($request->ajax()) {
+        return response()->json([
+            'html' => view('sesion_rows', compact('sesiones'))->render(),
+            'last_page' => $sesiones->lastPage()
+        ]);
     }
+
+    return view('sesion', compact('sesiones'));
+}
+
+
+public function cargarMas(Request $request)
+{
+    $page = $request->get('page', 1); // si no viene, 1
+    $sesiones = SesionEntrenamiento::select('id', 'nombre', 'descripcion', 'completada')
+        ->orderBy('id', 'desc')
+        ->paginate(5, ['*'], 'page', $page); // <-- clave
+
+    return response()->json([
+        'html' => view('sesion_rows', compact('sesiones'))->render(),
+        'last_page' => $sesiones->lastPage()
+    ]);
+}
 
     public function listSessionAPI(SesionEntrenamiento $sesion)
     {
@@ -72,7 +103,6 @@ class SesionEntrenamientoController extends Controller
                 ];
                 return response()->json($response, 404);
             }
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             $response = [
                 'response' => 400,

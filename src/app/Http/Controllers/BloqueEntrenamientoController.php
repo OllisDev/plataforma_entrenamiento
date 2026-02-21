@@ -8,10 +8,38 @@ use Illuminate\Http\Request;
 
 class BloqueEntrenamientoController extends Controller
 {
-    public function listBlock(BloqueEntrenamiento $bloque)
+    /*public function listBlock(BloqueEntrenamiento $bloque)
     {
         $bloques = $bloque->select('id', 'nombre', 'descripcion', 'tipo', 'duracion_estimada', 'potencia_pct_min', 'potencia_pct_max', 'pulso_reserva_pct', 'comentario')->get();
         return view('bloque', compact('bloques'));
+    }*/
+    public function listBlock(Request $request)
+    {
+        $bloques = BloqueEntrenamiento::select('id', 'nombre', 'descripcion', 'tipo', 'duracion_estimada', 'potencia_pct_min', 'potencia_pct_max', 'pulso_reserva_pct', 'comentario')
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('bloque_rows', compact('bloques'))->render(),
+                'last_page' => $bloques->lastPage()
+            ]);
+        }
+
+        return view('bloque', compact('bloques'));
+    }
+
+    public function cargarMasBloques(Request $request)
+    {
+        $page = $request->get('page', 1);
+        $bloques = BloqueEntrenamiento::select('id', 'nombre', 'descripcion', 'tipo', 'duracion_estimada', 'potencia_pct_min', 'potencia_pct_max', 'pulso_reserva_pct', 'comentario')
+            ->orderBy('id', 'desc')
+            ->paginate(5, ['*'], 'page', $page);
+
+        return response()->json([
+            'html' => view('bloque_rows', compact('bloques'))->render(),
+            'last_page' => $bloques->lastPage()
+        ]);
     }
 
     public function listBlockAPI(BloqueEntrenamiento $bloque)
@@ -65,7 +93,6 @@ class BloqueEntrenamientoController extends Controller
                 ];
                 return response()->json($response, 404);
             }
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             $response = [
                 'response' => 400,
@@ -140,7 +167,6 @@ class BloqueEntrenamientoController extends Controller
                 'message' => 'El bloque de entrenamiento se ha eliminado correctamente.'
             ];
             return response()->json($response, 200);
-
         } catch (\Illuminate\Validation\ValidationException $e) {
             $response = [
                 'response' => 400,

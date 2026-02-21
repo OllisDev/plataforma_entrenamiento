@@ -15,7 +15,9 @@ body {
 }
 
 .table-container {
-    overflow-x: auto;
+    height: 300px;            /* Altura para scroll vertical */
+    overflow-y: auto;         /* Scroll vertical */
+    overflow-x: auto;         /* Scroll horizontal si la tabla es ancha */
     margin: 32px auto;
     max-width: 900px;
     background: #fff;
