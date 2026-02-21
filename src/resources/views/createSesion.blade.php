@@ -15,7 +15,7 @@
     <div class="form-createSesion" id="form-createSesion">
         <h1>Crear sesión de entrenamiento</h1>
         <form>
-            <div class="form" id="select-container">
+            <div class="form">
                 <label for="select-plan">Plan:</label>
                 <select id="select-plan"></select>
             </div>

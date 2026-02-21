@@ -26,7 +26,12 @@ function mostrarOpciones() {
         .then((data) => {
             select.innerHTML = "";
 
-            if (data.success && data.plan) {
+            let defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.text = "Seleccione un plan...";
+            select.appendChild(defaultOption);
+
+            if (data.success && data.plan && data.plan.length > 0) {
                 data.plan.forEach((plan) => {
                     let option = document.createElement("option");
                     option.value = plan.id;
@@ -52,6 +57,7 @@ function validarCrear() {
     let descripcion = document.getElementById("descripcion").value;
     let completada = document.getElementById("completada").checked;
 
+    if (!validarPlan(planId)) return;
     if (!validarNombre(nombre)) return;
     if (!validarDescripcion(descripcion)) return;
 
@@ -95,6 +101,18 @@ function validarCrear() {
             console.error(error);
             mostrarMensaje("Error de conexión con el servidor", true);
         });
+}
+
+function validarPlan(planId) {
+    if (!planId || planId === "" || isNaN(planId)) {
+        mostrarMensaje(
+            "Error: Debes seleccionar un Plan de entrenamiento válido.",
+            true,
+        );
+        document.getElementById("select-plan").focus();
+        return false;
+    }
+    return true;
 }
 
 function validarNombre(nombre) {

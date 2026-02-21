@@ -30,7 +30,12 @@ function mostrarOpcionesSesion() {
         .then((data) => {
             select.innerHTML = "";
 
-            if (data.success && data.sesion) {
+            let defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.text = "Seleccione una sesión...";
+            select.appendChild(defaultOption);
+
+            if (data.success && data.sesion && data.sesion.length > 0) {
                 data.sesion.forEach((sesion) => {
                     let option = document.createElement("option");
                     option.value = sesion.id;
@@ -65,7 +70,12 @@ function mostrarOpcionesBloque() {
         .then((data) => {
             select.innerHTML = "";
 
-            if (data.success && data.bloques) {
+            let defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.text = "Seleccione un bloque...";
+            select.appendChild(defaultOption);
+
+            if (data.success && data.bloques && data.bloques.length > 0) {
                 data.bloques.forEach((bloque) => {
                     let option = document.createElement("option");
                     option.value = bloque.id;
@@ -92,6 +102,9 @@ function validarCrear() {
 
     let orden = document.getElementById("orden").value.trim();
     let repeticiones = document.getElementById("repeticiones").value.trim();
+
+    if (!validarSesion(sesionId)) return;
+    if (!validarBloque(bloqueId)) return;
 
     if (!validarOrden(orden)) return;
     if (!validarRepeticiones(repeticiones)) return;
@@ -133,6 +146,24 @@ function validarCrear() {
             console.error(error);
             mostrarMensaje("Error de conexión con el servidor", true);
         });
+}
+
+function validarSesion(sesionId) {
+    if (!sesionId || sesionId === "" || isNaN(sesionId)) {
+        mostrarMensaje("Error: Debes seleccionar una Sesión válida.", true);
+        document.getElementById("select-sesion").focus();
+        return false;
+    }
+    return true;
+}
+
+function validarBloque(bloqueId) {
+    if (!bloqueId || bloqueId === "" || isNaN(bloqueId)) {
+        mostrarMensaje("Error: Debes seleccionar un Bloque válido.", true);
+        document.getElementById("select-bloque").focus();
+        return false;
+    }
+    return true;
 }
 
 function validarOrden(orden) {
