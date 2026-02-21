@@ -7,18 +7,11 @@ use Illuminate\Http\Request;
 
 class SesionPlanController extends Controller
 {
-    public function listSesionPlan(SesionBloque $sesionPlan)
-    {
-        // SELECT orden, repeticiones FROM sesion_bloque
-        $sesionesPlan = $sesionPlan->select('id', 'orden', 'repeticiones')->get();
-        return view('sesionBloque', compact('sesionesPlan'));
-    }
-
     public function listSessionBlockAPI(SesionBloque $sesionBloque)
     {
         try {
             // SELECT orden, repeticiones FROM sesion_bloque
-            $sesionesBloque = $sesionBloque->select('orden', 'repeticiones')->get();
+            $sesionesBloque = $sesionBloque->select('id', 'orden', 'repeticiones')->get();
 
             if ($sesionesBloque) {
                 $response = [

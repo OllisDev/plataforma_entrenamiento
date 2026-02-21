@@ -32,7 +32,7 @@ Route::get('/sesion/crear', function () {
 
 Route::get('/bloque', function () {
     return view('bloque');
-});
+})->name('bloque.view');
 
 Route::get('bloque/crear', function () {
     return view('createBloque');
@@ -40,7 +40,7 @@ Route::get('bloque/crear', function () {
 
 Route::get('/sesionBloque', function () {
     return view('sesionBloque');
-});
+})->name('sesionBloque.view');
 
 Route::get('/sesionBloque/crear', function () {
     return view('createSesionBloque');
@@ -61,7 +61,7 @@ Route::post('/register', [CiclistaController::class, 'register'])->name('cyclist
 Route::post('/login', [CiclistaController::class, 'login'])->name('cyclist.login');
 
 // rutas para los bloques de entrenamiento
-Route::get('/bloque', [BloqueEntrenamientoController::class, 'listBlock'])->name('block.listBlock');
+Route::get('/bloque/listar', [BloqueEntrenamientoController::class, 'listBlockAPI'])->name('block.listBlock');
 Route::post('/bloque/crear', [BloqueEntrenamientoController::class, "createBlockAPI"])->name('block.createBlock');
 Route::post('/bloque/{bloque}/eliminar', [BloqueEntrenamientoController::class, "deleteBlockAPI"])->name('block.deleteBlock');
 
@@ -78,9 +78,9 @@ Route::post('/sesion/crear', [SesionEntrenamientoController::class, 'createSessi
 Route::delete('/sesion/{sesion}/eliminar', [SesionEntrenamientoController::class, "deleteSessionAPI"])->name('session.deleteSession');
 
 // rutas para la sesion-plan
-Route::get('/sesionBloque', [SesionPlanController::class, 'listSesionPlan'])->name('sessionPlan.listSesionBloque');
+Route::get('/sesionBloque/listar', [SesionPlanController::class, 'listSessionBlockAPI'])->name('sessionPlan.listSesionBloque');
 Route::post('/sesionBloque/crear', [SesionPlanController::class, 'createSessionBlockAPI'])->name('sessionPlan.createSessionBlock');
-Route::post('/sesionBloque/{sesion}/eliminar', [SesionPlanController::class, "deleteSessionAPI"])->name('sessionPlan.deleteSessionBlock');
+Route::delete('/sesionBloque/{sesion}/eliminar', [SesionPlanController::class, "deleteSessionBlockAPI"])->name('sessionPlan.deleteSessionBlock');
 
 
 Route::middleware('auth')->group(function () {
