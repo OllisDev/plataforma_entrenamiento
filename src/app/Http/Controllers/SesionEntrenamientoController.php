@@ -7,18 +7,18 @@ use Illuminate\Http\Request;
 
 class SesionEntrenamientoController extends Controller
 {
-    public function listSesiones(SesionEntrenamiento $sesion)
-    {
-        // SELECT nombre, descripcion, completada FROM sesion_entrenamiento
-        $sesiones = $sesion->select('id', 'nombre', 'descripcion', 'completada')->get();
-        return view('sesion', compact('sesiones'));
-    }
 
-    public function listSessionAPI(SesionEntrenamiento $sesion)
+    public function listSessionAPI(SesionEntrenamiento $sesion, Request $request)
     {
         try {
+            $offset = $request->query('offset', 0);
+            $limit = $request->query('limit', 10);
             // SELECT nombre, descripcion, completada FROM sesion_entrenamiento
-            $sesiones = $sesion->select('id', 'nombre', 'descripcion', 'completada')->get();
+            $sesiones = $sesion->select('id', 'nombre', 'descripcion', 'completada')
+                ->orderBy('id', 'desc')
+                ->skip($offset)
+                ->take($limit)
+                ->get();
 
             if ($sesiones) {
                 $response = [

@@ -15,34 +15,63 @@ body {
 }
 
 .table-container {
+    max-height: 500px;
+    overflow-y: auto;
     overflow-x: auto;
     margin: 32px auto;
     max-width: 900px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(41, 44, 255, 0.10);
-    padding: 24px;
+    background: transparent;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(41, 44, 255, 0.15);
+    padding: 32px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: #a3a5f7 #e3e3e0;
+    transition: box-shadow 0.3s;
 }
 
+
+
+.table-container::-webkit-scrollbar {
+    width: 10px;
+    background: #e3e3e0;
+    border-radius: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #7679fa 0%, #292cff 100%);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(41, 44, 255, 0.15);
+    transition: background 0.3s;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #292cff 0%, #7679fa 100%);
+}
+
+/* Tabla */
 .table-style {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    font-size: 1rem;
+    font-size: 1.05rem;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 14px;
     overflow: hidden;
+    box-shadow: 0 2px 12px rgba(41, 44, 255, 0.07);
+    transition: box-shadow 0.3s;
 }
 
 .table-style thead tr {
     background: linear-gradient(90deg, #292cff 80%, #7679fa 100%);
     color: #fff;
     font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
 }
 
 .table-style th,
 .table-style td {
-    padding: 14px 18px;
+    padding: 16px 20px;
     text-align: left;
 }
 
@@ -56,25 +85,27 @@ body {
 }
 
 .table-style tbody tr:hover {
-    background: #f3f4ff;
+    background: #e6e7fb;
 }
 
 .table-style td {
     color: #292cff;
+    font-weight: 500;
 }
 
 .table-style th {
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
+    color: #fff;
 }
 
 @media (max-width: 600px) {
     .table-container {
-        padding: 8px;
+        padding: 12px 4px;
     }
 
     .table-style th,
     .table-style td {
-        padding: 8px 6px;
-        font-size: 0.95rem;
+        padding: 10px 6px;
+        font-size: 0.98rem;
     }
 }
