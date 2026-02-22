@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class SesionPlanController extends Controller
 {
-    public function listSessionBlockAPI(SesionBloque $sesionBloque)
+    public function listSessionBlockAPI(SesionBloque $sesionBloque, Request $request)
     {
         try {
+            $offset = $request->query('offset', 0);
+            $limit = $request->query('limit', 10);
             // SELECT orden, repeticiones FROM sesion_bloque
-            $sesionesBloque = $sesionBloque->select('id', 'orden', 'repeticiones')->get();
+            $sesionesBloque = $sesionBloque->select('id', 'orden', 'repeticiones')
+                ->orderBy('id', 'desc')
+                ->skip($offset)
+                ->take($limit)
+                ->get();
 
             if ($sesionesBloque) {
                 $response = [
