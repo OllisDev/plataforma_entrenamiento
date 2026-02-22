@@ -154,7 +154,7 @@ class PlanEntrenamientoController extends Controller
                 'response' => 200,
                 'success' => true,
                 'status' => 'ok',
-                'message' => 'El plan de entrenamiento ha sido creado correctamente.'
+                'message' => 'El plan de entrenamiento ha sido eliminado correctamente.'
             ];
 
             return response()->json($response, 200);
