@@ -41,7 +41,7 @@
 
         cargando = true;
 
-        let url = `/sesion/listar?offset=${offset}$limit=${limit}`;
+        let url = `/sesion/listar?offset=${offset}&limit=${limit}`;
         fetch(url, {
             method: "GET",
             headers: {

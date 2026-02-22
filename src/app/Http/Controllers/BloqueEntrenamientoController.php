@@ -8,17 +8,18 @@ use Illuminate\Http\Request;
 
 class BloqueEntrenamientoController extends Controller
 {
-    public function listBlock(BloqueEntrenamiento $bloque)
-    {
-        $bloques = $bloque->select('id', 'nombre', 'descripcion', 'tipo', 'duracion_estimada', 'potencia_pct_min', 'potencia_pct_max', 'pulso_reserva_pct', 'comentario')->get();
-        return view('bloque', compact('bloques'));
-    }
-
-    public function listBlockAPI(BloqueEntrenamiento $bloque)
+    public function listBlockAPI(BloqueEntrenamiento $bloque, Request $request)
     {
         try {
+            $offset = $request->query('offset', 0);
+            $limit = $request->query('limit', 10);
             // SELECT nombre, descripcion, tipo, duracion_estimada, potencia_pct_min, potencia_pct_max, pulso_reserva_pct, comentario FROM bloque_entrenamiento
-            $bloques = $bloque->select('id', 'nombre', 'descripcion', 'tipo', 'duracion_estimada', 'potencia_pct_min', 'potencia_pct_max', 'pulso_pct_max', 'comentario')->get();
+            $bloques = $bloque
+                ->select('id', 'nombre', 'descripcion', 'tipo', 'duracion_estimada', 'potencia_pct_min', 'potencia_pct_max', 'pulso_pct_max', 'comentario')
+                ->orderBy('id', 'desc')
+                ->skip($offset)
+                ->take($limit)
+                ->get();
 
             if ($bloques) {
                 $response = [
