@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\BicicletaController;
 use App\Http\Controllers\BloqueEntrenamientoController;
-use App\Http\Controllers\CiclistaController;
 use App\Http\Controllers\PlanEntrenamientoController;
 use App\Http\Controllers\ResultadosController;
 use App\Http\Controllers\SesionEntrenamientoController;
@@ -35,8 +35,12 @@ Route::middleware('auth:api')->delete('/sesion/{sesion}', [SesionEntrenamientoCo
 Route::middleware('auth:api')->get('/sesion/{sesion}', [SesionEntrenamientoController::class, 'listSessionByIdAPI'])->name('sessionAPI.listSessionById');
 
 // rutas para los resultados de entrenamiento
-Route::post('/resultado/crear', [ResultadosController::class, "createResultAPI"])->name('resultAPI.createResult');
-Route::get('/resultado/{resultado}', [ResultadosController::class, "listResultByIdAPI"])->name('resultAPI.listResultById');
+Route::middleware('auth:api')->post('/resultado/crear', [ResultadosController::class, "createResultAPI"])->name('resultAPI.createResult');
+Route::middleware('auth:api')->get('/resultado/ciclista/{ciclista}', [ResultadosController::class, "listResultByCiclistaAPI"])->name('resultAPI.listResultByCiclista');
+Route::middleware('auth:api')->delete('/resultado/{resultado}/eliminar', [ResultadosController::class, "deleteResultAPI"])->name('resultAPI.deleteResultAPI');
+
+// rutas para bicicletas
+Route::get('/bicicleta', [BicicletaController::class, 'listBicycleAPI'])->name('bicycleAPI.listBicycle');
 
 // rutas para la sesion-plan entrenamiento
 Route::get('/sesionBloque', [SesionPlanController::class, 'listSessionBlockAPI'])->name('sessionPlanAPI.listSessionBlock');

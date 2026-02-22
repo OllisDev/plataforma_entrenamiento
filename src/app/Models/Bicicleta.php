@@ -10,4 +10,11 @@ class Bicicleta extends Model
     use HasFactory;
     protected $table = 'bicicleta';
     public $timestamps = false;
+
+    protected $fillable = [
+        'id',
+        'nombre',
+        'tipo',
+        'comentario'
+    ];
 }

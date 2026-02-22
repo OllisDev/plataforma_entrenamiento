@@ -28,5 +28,13 @@
             { "title": "Ver bloque de entrenamiento", "link": "/bloque" },
             { "title": "Crear bloque de entrenamiento", "link": "bloque/crear" }
         ]
+    },
+    {
+        "title": "Resultados",
+        "link": "#",
+        "submenus": [
+            { "title": "Crear resultados", "link": "/resultado/crear" },
+            { "title": "Ver resultados", "link": "/resultado"}
+        ]
     }
 ]

@@ -8,6 +8,24 @@ function cargarMenus() {
     fetch("json/menus.json")
         .then((response) => response.json())
         .then((menus) => {
+            let ciclistaId = document.getElementById("ciclistaId")?.value;
+
+            menus.forEach((menu) => {
+                if (menu.link && menu.link.includes("{ciclista}")) {
+                    menu.link = menu.link.replace("{ciclista}", ciclistaId);
+                }
+                if (menu.submenus) {
+                    menu.submenus.forEach((sub) => {
+                        if (sub.link && sub.link.includes("{ciclista}")) {
+                            sub.link = sub.link.replace(
+                                "{ciclista}",
+                                ciclistaId,
+                            );
+                        }
+                    });
+                }
+            });
+
             let menuList = document.getElementById("menu-list");
             menus.forEach((menu) => {
                 let li = document.createElement("li");

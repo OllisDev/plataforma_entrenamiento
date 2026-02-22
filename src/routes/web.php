@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CiclistaController;
+use App\Http\Controllers\ResultadosController;
 use App\Http\Controllers\BloqueEntrenamientoController;
 use App\Http\Controllers\PlanEntrenamientoController;
 use App\Http\Controllers\SesionEntrenamientoController;
@@ -48,7 +49,7 @@ Route::get('/sesionBloque/crear', function () {
 
 Route::get('/resultado', function () {
     return view('resultado');
-});
+})->name('resultado.view');
 
 Route::get('/resultado/crear', function () {
     return view('createResultado');
@@ -82,6 +83,10 @@ Route::get('/sesionBloque/listar', [SesionPlanController::class, 'listSessionBlo
 Route::post('/sesionBloque/crear', [SesionPlanController::class, 'createSessionBlockAPI'])->name('sessionPlan.createSessionBlock');
 Route::delete('/sesionBloque/{sesion}/eliminar', [SesionPlanController::class, "deleteSessionBlockAPI"])->name('sessionPlan.deleteSessionBlock');
 
+// rutas para los resultados de entrenamiento
+Route::post('/resultado/crear', [ResultadosController::class, "createResultAPI"])->name('result.createResult');
+Route::get('/resultado/ciclista/{ciclista}', [ResultadosController::class, "listResultByCiclistaAPI"])->name('result.listResultByCiclista');
+Route::delete('/resultado/{resultado}/eliminar', [ResultadosController::class, "deleteResultAPI"])->name('result.deleteResult');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
