@@ -41,6 +41,7 @@ Route::middleware('auth:api')->delete('/resultado/{resultado}/eliminar', [Result
 
 // rutas para bicicletas
 Route::get('/bicicleta', [BicicletaController::class, 'listBicycleAPI'])->name('bicycleAPI.listBicycle');
+Route::middleware('auth:api')->post('/bicicleta/crear', [BicicletaController::class, 'createBicycleAPI'])->name('bicycleAPI.createBicycle');
 
 // rutas para la sesion-plan entrenamiento
 Route::get('/sesionBloque', [SesionPlanController::class, 'listSessionBlockAPI'])->name('sessionPlanAPI.listSessionBlock');

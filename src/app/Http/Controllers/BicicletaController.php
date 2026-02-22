@@ -41,4 +41,36 @@ class BicicletaController extends Controller
             return response()->json($response, 400);
         }
     }
+
+    public function createBicycleAPI(Request $request)
+    {
+        try {
+            $data = $request->validate([
+                'nombre' => 'required|string|max:50',
+                'tipo' => 'required|string|max:50',
+                'comentario' => 'nullable|string|max:255'
+            ]);
+
+            $bicicleta = Bicicleta::create($data);
+
+            if ($bicicleta) {
+                $response = [
+                    'response' => 201,
+                    'success' => true,
+                    'status' => 'ok',
+                    'message' => 'Se ha creado la bicicleta correctamente.'
+                ];
+                return response()->json($response, 201);
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $response = [
+                'response' => 400,
+                'success' => false,
+                'status' => 'error',
+                'message' => 'Formato incorrecto.'
+            ];
+            return response()->json($response, 400);
+        }
+
+    }
 }

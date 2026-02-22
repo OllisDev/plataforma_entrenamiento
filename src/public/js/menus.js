@@ -65,6 +65,24 @@ function cargarMenus() {
 
 // cargar contenido de cada una de las páginas al pulsar en los submenus
 function cargarContenido(url) {
+    if (url === "/logout") {
+        let form = document.createElement("form");
+        form.method = "POST";
+        form.action = "/logout";
+
+        let csrfToken = document.querySelector(
+            'meta[name="csrf-token"]',
+        ).content;
+        let inputToken = document.createElement("input");
+        inputToken.type = "hidden";
+        inputToken.name = "_token";
+        inputToken.value = csrfToken;
+
+        form.appendChild(inputToken);
+        document.body.appendChild(form);
+        form.submit();
+        return;
+    }
     fetch(url)
         .then((response) => response.text())
         .then((html) => {

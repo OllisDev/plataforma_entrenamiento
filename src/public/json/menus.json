@@ -4,6 +4,13 @@
         "link": "/"
     },
     {
+        "title": "Bicicleta",
+        "link": "#",
+        "submenus": [
+            { "title": "Crear bicicleta", "link": "/bicicleta/crear"}
+        ]
+    },
+    {
         "title": "Planes",
         "link": "#",
         "submenus": [
@@ -36,5 +43,14 @@
             { "title": "Crear resultados", "link": "/resultado/crear" },
             { "title": "Ver resultados", "link": "/resultado"}
         ]
+    },
+    {
+        "title": "Cuenta",
+        "link": "#",
+        "submenus":  [
+            { "title": "Cerrar sesión", "link": "/logout" }
+        ]
+            
     }
+    
 ]

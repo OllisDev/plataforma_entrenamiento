@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BicicletaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CiclistaController;
@@ -55,6 +56,10 @@ Route::get('/resultado/crear', function () {
     return view('createResultado');
 });
 
+Route::get('bicicleta/crear', function () {
+    return view('createBicicleta');
+});
+
 // -- RUTAS PARA LA FUNCIONALIDAD DE LAS PÁGINAS --
 
 // rutas para la autenticación
@@ -87,6 +92,9 @@ Route::delete('/sesionBloque/{sesion}/eliminar', [SesionPlanController::class, "
 Route::post('/resultado/crear', [ResultadosController::class, "createResultAPI"])->name('result.createResult');
 Route::get('/resultado/ciclista/{ciclista}', [ResultadosController::class, "listResultByCiclistaAPI"])->name('result.listResultByCiclista');
 Route::delete('/resultado/{resultado}/eliminar', [ResultadosController::class, "deleteResultAPI"])->name('result.deleteResult');
+
+// rutas para la sección de bicicletas
+Route::post('/bicicleta/crear', [BicicletaController::class, "createBicycleAPI"])->name('bicycle.createBicycle');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -40,12 +40,7 @@
         </form>
 
         <br>
-        @if (Route::has('password.request'))
-        <a class="forget-password" href="{{ route('password.request') }}">
-            ¿Has olvidado la contraseña?
-        </a>
-        @endif
-        <br>
+
         <p>¿No tienes cuenta?<a href="/register" class="link">Crea una cuenta</a></p>
     </div>
 </body>
